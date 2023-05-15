@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;"> -->
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta
+      name="viewport"
+      content="initial-scale=1, width=device-width, viewport-fit=cover"
+    />
+    <meta name="color-scheme" content="light dark" />
+
+    <title>Pin Delivery</title>
+
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="./assets/fontawsome/css/all.css" />
+    <link rel="stylesheet" href="./css/index.css">
+
+  </head>
+  <body>
+
+    <main class="all-content" >
+      <section class="fixed-top bg-white mt-0 ps-4 pt-3 pe-3 pb-2 w-100 bob">
+        <h4 class="m-0 fw-bold" id="username"></h4>
+        <div class="d-flex align-items-center text-secondary">
+          <i class="fa-solid fa-location-dot"></i>
+          <p class="m-0 ms-1">Praia, Cabo Verde</p>
+        </div>
+      </section>
+
+      <section class="p-4 pt-3">
+
+        <section class="mt-5">
+          <center>
+            <img
+              src="./assets/img/delivery.svg"
+              alt="deliver"
+              class="mt-5 mb-4"
+              style="height: 130px"
+            />
+          </center>
+          <div
+            class="input-group placeholder-wave mt-2 mb-5"
+            style="height: 50px;"
+            onclick="transport()"
+          >
+            <input
+              type="button"
+              class="form-control ps-0 text-white border-0 bg-dark fs-3"
+              style="border-radius: 2rem 0 0 2rem;"
+              value="Fazer envio"
+            />
+            <div 
+              class="input-group-text bg-dark text-white border-0"
+              style="border-radius: 0 2rem 2rem 0;"
+              >
+              <i class="fa-solid fa-angle-right"></i>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h3 class="fw-bold mb-3">Destinos com mais envios</h3>
+          <div class="d-flex align-items-center mb-2">
+            <div
+              style="
+                width: 40px;
+                height: 30px;
+                background: no-repeat center/100%
+                  url('./assets/img/portugal.png');
+              "
+            ></div>
+            <p class="text-secondary fw-semibold m-0 ms-2 fs-3">Lisboa, Portugal</p>
+          </div>
+          <div class="d-flex align-items-center mb-2">
+            <div
+              style="
+                width: 40px;
+                height: 30px;
+                background: no-repeat center/100% url('./assets/img/france.png');
+              "
+            ></div>
+            <p class="text-secondary fw-semibold m-0 ms-2 fs-3">Paris, França</p>
+          </div>
+          <div class="d-flex align-items-center mb-2">
+            <div
+              style="
+                width: 40px;
+                height: 30px;
+                background: no-repeat center/100%
+                  url('./assets/img/united-states.png');
+              "
+            ></div>
+            <p class="text-secondary fw-semibold m-0 ms-2 fs-3">Boston, USA</p>
+          </div>
+          <div class="d-flex align-items-center mb-2">
+            <div
+              style="
+                width: 40px;
+                height: 30px;
+                background: no-repeat center/100%
+                  url('./assets/img/united-states.png');
+              "
+            ></div>
+            <p class="text-secondary fw-semibold m-0 ms-2 fs-3">Brockton, USA</p>
+          </div>
+          <div class="d-flex align-items-center">
+            <div
+              style="
+                width: 40px;
+                height: 30px;
+                background: no-repeat center/100% url('./assets/img/france.png');
+              "
+            ></div>
+            <p class="text-secondary fw-semibold m-0 ms-2 fs-3">Nice, França</p>
+          </div>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <footer class="p-4 pt-2 footer bg-dark text-white">
+      <nav class="ms-3 me-3">
+        <ul
+          class="list-unstyled d-flex flex-row align-items-center justify-content-between m-0 fs-1"
+          id="navFooter"
+        >
+          <li class="home" onclick="home()">
+            <i class="fa-solid fa-house"></i>
+          </li>
+          <li class="opacity-50 tracking" onclick="tracking()">
+            <i class="fa-solid fa-map-location-dot "></i>
+          </li>
+          <li class="opacity-50 support" onclick="support()">
+            <i class="fa-solid fa-envelope"></i>
+          </li>
+          <li class="opacity-50 profile" onclick="profile()">
+            <i class="fa-solid fa-user"></i>
+          </li>
+        </ul>
+      </nav>
+    </footer>
+
+    <script src="./js/jquery-3.1.1.min.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="./js/index.js"></script>
+  </body>
+</html>
