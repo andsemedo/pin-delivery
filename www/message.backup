@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Splash Screen</title>
+
+    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="./assets/fontawsome/css/all.css" />
+
+  </head>
+  <body class="h-100">
+    <div
+      class="bg-dark d-flex align-items-center justify-content-center"
+      style="height: 100vh"
+    >
+      <img
+        src="./assets/img/logo.png"
+        class="placeholder-wave"
+        style="height: 250px"
+      />
+    </div>
+
+    <section
+      class="bg-secondary bottom-0 w-100 position-absolute p-5 visually-hidden"
+      id="loginSection"
+      style="border-radius: 40px 40px 0 0; z-index: 1030;" 
+    >
+      <div class="d-flex flex-column" id="firstTimeSection">
+          <span class="text-danger fw-semibold visually-hidden" id="emailAlert">Preencha este campo!</span>
+          <span class="text-danger fw-semibold visually-hidden" id="emailInvalido">E-mail digitado não é válido!</span>
+          <input type="email" class="form-control bg-dark text-white border-0 mb-2" placeholder="Digite o seu email" id="email" required />
+          <input type="submit" class="btn btn-dark w-100 mb-2 fw-semibold" id="btnRegister" onclick="continueRegistration()"  value="Continuar registro" />
+        <input type="button" class="btn bg-white fw-semibold" id="btnContinue" value="Continuar como convidado" />
+      </div>
+
+      <!-- Continuar com registro -->
+      <div class="container visually-hidden" id="registrationSection">
+
+        <section class="mb-3">
+          <h4 class="text-white fs-6" onclick="backFirstSection()"><i class="fa-solid fa-angle-left"></i> Voltar</h4>
+        </section>
+
+        <form action="#" class="row">
+          <div class="col-12">
+            <input type="text" class="form-control bg-dark text-white border-0 mb-2" placeholder="Primeiro nome" required />
+          </div>
+
+          <div class="col-12">
+            <input type="text" class="form-control bg-dark text-white border-0 mb-2" placeholder="Último nome" required />
+          </div>
+
+          <div class="col-5">
+            <select class="form-select bg-dark text-white">
+              <option value="+238" selected>+238</option>
+            </select>
+          </div>
+
+          <div class="col">
+            <input type="number" max="7" class="form-control bg-dark text-white border-0 mb-2" placeholder="Telemóvel" required />
+          </div>
+
+          <div class="col-12">
+            <input type="email" maxlength="7" class="form-control bg-dark text-white border-0 mb-2" placeholder="Email" required />
+          </div>
+
+          <div class="col-12">
+            <input type="button" maxlength="7" class="btn bg-white text-black fw-semibold border-0 mb-2 w-100" value="Registrar" />
+          </div>
+        </form>
+
+      </div>
+
+    </section>
+
+    <div class="bg-dark opacity-75 position-absolute top-0 visually-hidden" id="loginBg" style="width: 100vw; height: 100vh;"></div>
+
+    <script src="./js/jquery-3.1.1.min.js"></script>
+    <script src="./js/script.js"></script>
+    <!-- <script>
+        setTimeout(()=>{
+            window.location = './home.html'
+        }, 4000)
+    </script> -->
+
+    <script>
+      module = {};
+      module.test = 'teste'
+    </script>
+    <script type="module">
+        // Import the functions from the SDKs
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getDatabase, ref, set, remove } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js";
+        // Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyAO1ZtCF0Vbz1CdbhJzlFVN29uEU3gVbcc",
+          authDomain: "chat-pin-delivery.firebaseapp.com",
+          projectId: "chat-pin-delivery",
+          storageBucket: "chat-pin-delivery.appspot.com",
+          messagingSenderId: "130275241010",
+          appId: "1:130275241010:web:541b2a714b9fea0c71602b",
+          measurementId: "G-T22ET6CE0L"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app)
+    
+        let msgText = document.getElementById('msgText');
+        let msgBtn = document.getElementById('msgBtn');
+        let sender = sessionStorage.getItem('sender');
+    
+        // Send Message
+        module.sendMsg = function sendMsg() {
+            var msg = msgText.value
+            var timestamp = new Date().getTime()
+            set(ref(db, "message/"+timestamp), {
+                msg: msg,
+                sender: sender
+            })
+        }
+    
+        function teste() {
+          console.log('teste');
+        }
+    
+    </script>
+
+    
+  </body>
+</html>

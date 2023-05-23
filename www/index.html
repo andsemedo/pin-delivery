@@ -12,7 +12,7 @@
   </head>
   <body class="h-100">
     <div
-      class="bg-dark d-flex align-items-center justify-content-center"
+      class="bg-dark d-flex  flex-column align-items-center justify-content-center"
       style="height: 100vh"
     >
       <img
@@ -20,7 +20,10 @@
         class="placeholder-wave"
         style="height: 250px"
       />
+
     </div>
+
+    
 
     <section
       class="bg-secondary bottom-0 w-100 position-absolute p-5 visually-hidden"
@@ -31,7 +34,7 @@
           <span class="text-danger fw-semibold visually-hidden" id="emailAlert">Preencha este campo!</span>
           <span class="text-danger fw-semibold visually-hidden" id="emailInvalido">E-mail digitado não é válido!</span>
           <input type="email" class="form-control bg-dark text-white border-0 mb-2" placeholder="Digite o seu email" id="email" required />
-          <input type="submit" class="btn btn-dark w-100 mb-2 fw-semibold" id="btnRegister" onclick="continueRegistration()"  value="Continuar registro" />
+          <input type="submit" class="btn btn-dark w-100 mb-2 fw-semibold" id="btnRegister" onclick="continueRegistration()"  value="Entre com a sua conta" />
         <input type="button" class="btn bg-white fw-semibold" id="btnContinue" value="Continuar como convidado" />
       </div>
 
@@ -42,31 +45,37 @@
           <h4 class="text-white fs-6" onclick="backFirstSection()"><i class="fa-solid fa-angle-left"></i> Voltar</h4>
         </section>
 
-        <form action="#" class="row">
+        <div class="alert alert-danger" role="alert">
+          Ainda não tens uma conta. Crie uma!
+        </div>
+
+        <form class="row" onsubmit="return false" onchange="verifyFormRegistration()">
           <div class="col-12">
-            <input type="text" class="form-control bg-dark text-white border-0 mb-2" placeholder="Primeiro nome" required />
-          </div>
-
-          <div class="col-12">
-            <input type="text" class="form-control bg-dark text-white border-0 mb-2" placeholder="Último nome" required />
-          </div>
-
-          <div class="col-5">
-            <select class="form-select bg-dark text-white">
-              <option value="+238" selected>+238</option>
-            </select>
-          </div>
-
-          <div class="col">
-            <input type="number" max="7" class="form-control bg-dark text-white border-0 mb-2" placeholder="Telemóvel" required />
+            <input type="text" class="form-control bg-dark text-white border-0 mb-2" placeholder="Primeiro nome" id="firstName" required />
           </div>
 
           <div class="col-12">
-            <input type="email" maxlength="7" class="form-control bg-dark text-white border-0 mb-2" placeholder="Email" required />
+            <input type="text" class="form-control bg-dark text-white border-0 mb-2" placeholder="Último nome" id="lastName" required />
           </div>
 
           <div class="col-12">
-            <input type="button" maxlength="7" class="btn bg-white text-black fw-semibold border-0 mb-2 w-100" value="Registrar" />
+            <input type="number" class="form-control bg-dark text-white border-0 mb-2" placeholder="Telemóvel" id="phoneNumber" required />
+          </div>
+
+          <div class="col-12">
+            <input type="text" class="form-control bg-dark text-white border-0 mb-2" placeholder="País" id="country" required />
+          </div>
+
+          <div class="col-12">
+            <input type="text" class="form-control bg-dark text-white border-0 mb-2" placeholder="Cidade" id="city" required />
+          </div>
+
+          <div class="col-12">
+            <input type="email" class="form-control bg-dark text-white border-0 mb-2" placeholder="Email" id="emailRegister" required />
+          </div>
+
+          <div class="col-12">
+            <input type="submit" id="btnCreateAccount" class="btn bg-white text-black fw-semibold border-0 mb-2 w-100" value="Registrar" onclick="createAccount()" disabled />
           </div>
         </form>
 
@@ -76,6 +85,8 @@
 
     <div class="bg-dark opacity-75 position-absolute top-0 visually-hidden" id="loginBg" style="width: 100vw; height: 100vh;"></div>
 
+    
+
     <script src="./js/jquery-3.1.1.min.js"></script>
     <script src="./js/script.js"></script>
     <!-- <script>
@@ -83,5 +94,9 @@
             window.location = './home.html'
         }, 4000)
     </script> -->
+
+    
+
+    
   </body>
 </html>

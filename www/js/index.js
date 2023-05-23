@@ -1,9 +1,17 @@
+let userData = localStorage.getItem('userData');
+let username = '';
+
+if(userData) {
+  userData = JSON.parse(userData);
+  username = userData[0].nome
+}
 
 
-if(!localStorage.getItem('username')) {
+
+if(!username) {
   $('#username').html('Convidado');
 } else {
-  $('#username').html(localStorage.getItem('username'));
+  $('#username').html(username);
 }
 
 // ajax
@@ -80,7 +88,34 @@ function support() {
       $(".all-content").html(data);
     }
   });
+  // window.location = './support.html'
 }
+
+function chat() {
+  window.location = './chat.html'
+}
+
+
+
+
+function backToSupport() {
+  sessionStorage.setItem('from_chat', true);
+  backHome()
+}
+
+function verifySupport() {
+  if(sessionStorage.getItem('from_chat') == 'true') {
+    support()
+    sessionStorage.removeItem('from_chat')
+  } else {
+
+    console.log('teste');
+  }
+}
+
+verifySupport()
+
+
 
 function profile() {
   activeNav('profile')
@@ -108,6 +143,18 @@ function profile() {
 //   // }
 // });
 
+// PIN DELIVERY API
+const api_url = 'https://aniltonf.com/api/pindelivery';
+const table_user = '10315_user';
+const table_package = '10315_pacote';
+
+// Get data from one user
+async function getUserData(url, table_user, email) {
+  const response = await fetch(url+'getUser.php?table='+table_user+'&email='+email);
+  const jsonData = await response.json();
+  console.log(jsonData);
+}
+
 function verifyEmail() {
 
   let emailVer = $('#emailVer').val();
@@ -123,23 +170,52 @@ function verifyEmail() {
     
   } else if(emailVer != '') {
 
+    console.log('ok1');
+
       let regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
       if(!regex.test(emailVer.toLowerCase())) {
         $('#emailVerAlert').addClass('visually-hidden');
         $('#emailVerInvalido').removeClass('visually-hidden');
         $('#emailVer').removeClass('border-0');
         $('#emailVer').addClass('border-2 border-danger');
-      } else {
-        $('#emailVerAlert').addClass('visually-hidden');
-        $('#emailVerInvalido').addClass('visually-hidden');
-        // $('#emailVer').removeClass('border-0');
-        $('#emailVer').removeClass('border-2 border-danger');
-        $('#emailVerBtn').addClass('visually-hidden');
 
-        $('#AfterEmailVer').removeClass('visually-hidden');
+        console.log('ok2');
+      } else {
+
+        console.log('ok');
+        
+
+        $('#registrationSection').addClass('visually-hidden');
+
+        // $('#emailVerAlert').addClass('visually-hidden');
+        // $('#emailVerInvalido').addClass('visually-hidden');
+        // $('#emailVer').removeClass('border-2 border-danger');
+        // $('#emailVerBtn').addClass('visually-hidden');
+        // $('#AfterEmailVer').removeClass('visually-hidden');
       }
     
   } 
 
-  
 }
+
+function toggleMsgBtn() {
+  let msgText = document.getElementById('msgText');
+  let msgBtn = document.getElementById('msgBtn');
+
+  console.log('asaa');
+
+  if(document.getElementById('msgText').value != '') {
+    // msgBtn.attributes.removeNamedItem('disabled');
+    $(msgBtn).removeAttr('disabled');
+  } else {
+    // msgBtn.attributes.setNamedItem(disabled);
+    $(msgBtn).attr('disabled');
+  }
+
+
+}
+
+
+
+

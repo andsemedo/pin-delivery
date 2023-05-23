@@ -17,4 +17,16 @@
 
     </div>
 
+    
+    <div class="mt-4" id="chatSupport">
+        <input type="button" class="btn text-bg-dark placeholder-wave rounded-5 text-center w-100" value="Chat" onclick="chat()">
+    </div>
+    
+
 </section>
+
+<script>
+    if(!username) {
+        document.getElementById('chatSupport').classList.add('visually-hidden')
+    }
+</script>

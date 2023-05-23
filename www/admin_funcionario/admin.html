@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../assets/fontawsome/css/all.min.css" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Admin - Funcionario</title>
+</head>
+
+<body>
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar -->
+        <div class="bg-dark" id="sidebar-wrapper">
+            <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom"> <img src="../assets/img/logo_2.png" class="logo"></div>
+            <div class="list-group list-group-flush my-3" id="navSide">
+                <a href="" class="list-group-item list-group-item-action bg-transparent second-text fw-bold active dash">
+                    <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+                </a>
+                <a href="#packages" class="list-group-item list-group-item-action bg-transparent second-text fw-bold packages" onclick="packages()">
+                    <i class="fas fa-box-archive me-2"></i>Pacotes
+                </a>
+                <a href="#chat" class="list-group-item list-group-item-action bg-transparent second-text fw-bold chat" onclick="chat()">
+                    <i class="fas fa-comments me-2" ></i>Mensagens
+                </a>
+                <a href="#" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold">
+                    <i class="fas fa-power-off me-2"></i>Logout
+                </a>
+            </div>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>
+                    <h2 class="fs-2 m-0 page-name">Dashboard</h2>
+                </div>
+            </nav>
+
+            <div class="container-fluid px-4 page-content">
+                <div class="row g-3 my-2">
+                    <div class="col-md-3">
+                        <div class="p-3 bg-dark text-white shadow-sm d-flex justify-content-around align-items-center rounded">
+                            <div>
+                                <h3 class="fs-2">720</h3>
+                                <p class="fs-5">Products</p>
+                            </div>
+                            <i class="fas fa-gift fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="p-3 bg-dark text-white shadow-sm d-flex justify-content-around align-items-center rounded">
+                            <div>
+                                <h3 class="fs-2">4920</h3>
+                                <p class="fs-5">Sales</p>
+                            </div>
+                            <i
+                                class="fas fa-hand-holding-usd fs-1 primary-text border rounded-full secondary-bg p-3"></i>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+    </div>
+    <script>
+        var el = document.getElementById("wrapper");
+        const toggleButton = document.getElementById("menu-toggle");
+
+        toggleButton.onclick = function () {
+            // console.log(el.classList.toggle("toggled"));
+            el.classList.toggle("toggled");
+        };
+    </script>
+    <script src="../js/jquery-3.1.1.min.js"></script>
+    <script src="./script.js">
+        
+    </script>
+</body>
+
+</html>
