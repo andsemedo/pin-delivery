@@ -18,15 +18,12 @@
             <div class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom"> <img src="../assets/img/logo_2.png" class="logo"></div>
             <div class="list-group list-group-flush my-3" id="navSide">
                 <a href="" class="list-group-item list-group-item-action bg-transparent second-text fw-bold active dash">
-                    <i class="fas fa-tachometer-alt me-2"></i>Dashboard
-                </a>
-                <a href="#packages" class="list-group-item list-group-item-action bg-transparent second-text fw-bold packages" onclick="packages()">
                     <i class="fas fa-box-archive me-2"></i>Pacotes
                 </a>
-                <a href="#chat" class="list-group-item list-group-item-action bg-transparent second-text fw-bold chat" onclick="chat()">
+                <a href="messages.html" class="list-group-item list-group-item-action bg-transparent second-text fw-bold chat" onclick="messages()">
                     <i class="fas fa-comments me-2" ></i>Mensagens
                 </a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold">
+                <a onclick="logout()" class="list-group-item list-group-item-action bg-transparent text-danger fw-bold">
                     <i class="fas fa-power-off me-2"></i>Logout
                 </a>
             </div>
@@ -38,35 +35,68 @@
             <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
                 <div class="d-flex align-items-center">
                     <i class="fas fa-align-left primary-text fs-4 me-3" id="menu-toggle"></i>
-                    <h2 class="fs-2 m-0 page-name">Dashboard</h2>
+                    <h2 class="fs-2 m-0 page-name">Pacote</h2>
                 </div>
             </nav>
 
             <div class="container-fluid px-4 page-content">
-                <div class="row g-3 my-2">
-                    <div class="col-md-3">
-                        <div class="p-3 bg-dark text-white shadow-sm d-flex justify-content-around align-items-center rounded">
-                            <div>
-                                <h3 class="fs-2">720</h3>
-                                <p class="fs-5">Products</p>
-                            </div>
-                            <i class="fas fa-gift fs-1 primary-text border rounded-full secondary-bg p-3"></i>
-                        </div>
-                    </div>
+                <div class="container-fluid px-4">
+                    
+                    <h2 class="text-center mt-3 mb-5 fw-semibold text-primary border-bottom border-primary pb-2">Atualizar pacote</h2>
 
-                    <div class="col-md-3">
-                        <div class="p-3 bg-dark text-white shadow-sm d-flex justify-content-around align-items-center rounded">
-                            <div>
-                                <h3 class="fs-2">4920</h3>
-                                <p class="fs-5">Sales</p>
-                            </div>
-                            <i
-                                class="fas fa-hand-holding-usd fs-1 primary-text border rounded-full secondary-bg p-3"></i>
-                        </div>
+                    <div class="alert alert-danger alert-dismissible fade show visually-hidden" id="dangerAlert" role="alert">
+                        Pacote não encontrado
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
+                
+                    <form class="" onsubmit="return false" onchange="verifyEmail()">
+                        <div class="form-group">
+                            <label class="fw-semibold">Dono do pacote</label>
+                            <div class="input-group mt-2">
+                                <input type="email" class="form-control" id="email" placeholder="Introduza o E-mail">
+                                <div class="input-group-text bg-white" id="searchBtn" style="display: none;">
+                                  <button type="submit" class="border-0 p-0 bg-white" onclick="search()"><i class="fa-solid fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    
+                    <section id="sectionPackageData" class="visually-hidden">
+                        <h3 class="mt-5">Pacotes encontrados</h3>
+
+                        <div class="alert alert-success alert-dismissible fade show visually-hidden" role="alert" id="successAlert">
+                            Pacote atualizado com sucesso
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+
+                        <div class="d-flex flex-column" id="packagesFound">
+                            <!-- <div class="mb-3 border-bottom border-dark">
+                                <div class="form-group">
+                                    <label class="fw-semibold">ID do pacote</label>
+                                    <label id="packageId"></label>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="fw-semibold">Tipo de pacote</label>
+                                    <label id="packageType"></label>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="fw-semibold">Estado</label>
+                                    <select class="form-select mt-2" onchange="updateBtn()" id="packageStatus">
+                                        <option value="origem">Na origem</option>
+                                        <option value="emTransito">Em trânsito</option>
+                                        <option value="emDestino">No país destino</option>
+                                        <option value="destino">Entregue</option>
+                                    </select>
+                                </div>
+
+                                <button class="btn btn-success w-100 mt-3 mb-3 visually-hidden" id="btnAtualizar" onclick="updatePackage()">Atualizar</button>
+                            </div> -->
+                        </div>
+                    </section>
                 </div>
-
-
             </div>
         </div>
     </div>
@@ -82,6 +112,7 @@
         };
     </script>
     <script src="../js/jquery-3.1.1.min.js"></script>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="./script.js">
         
     </script>

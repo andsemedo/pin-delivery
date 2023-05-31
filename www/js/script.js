@@ -1,15 +1,24 @@
+let userData = localStorage.getItem("userData");
+let firtTimeInApp = localStorage.getItem("first_time");
+let username = '';
+let userEmail = '';
+if(userData) {
+  userData = JSON.parse(userData);
+  username = userData[0].nome;
+  userEmail = userData[0].email;
+}
+
 function splashScreen() {
+  if(userEmail == 'func@pindelivery.com') {
+    window.location = './admin_funcionario/admin.html';
+  } else {
     window.location = './home.html';
+  }
+    
 }
 
 $(document).ready(function () {
-  let userData = localStorage.getItem("userData");
-  let firtTimeInApp = localStorage.getItem("first_time");
-  let username = '';
-  if(userData) {
-    userData = JSON.parse(userData);
-    username = userData[0].nome;
-  }
+  
   
 
   if (!username) {
@@ -32,7 +41,9 @@ $(document).ready(function () {
     }
 
   } else {
-    splashScreen()
+    setTimeout(() => {
+      splashScreen()
+    }, 3000)
   }
 
   function continueAsGuest() {
@@ -85,9 +96,15 @@ function getUserAndFetch(email) {
         $("#emailRegister").val(email);
       }
     } else if(res[0].email == email) {
-      const userData = JSON.stringify(res);
-      localStorage.setItem('userData', userData);
-      splashScreen()
+      if(email == 'func@pindelivery.com') {
+        const userData = JSON.stringify(res);
+        localStorage.setItem('userData', userData);
+        window.location = './admin_funcionario/admin.html';
+      } else {
+        const userData = JSON.stringify(res);
+        localStorage.setItem('userData', userData);
+        splashScreen()
+      }
     }
 
   });

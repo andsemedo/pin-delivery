@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../assets/fontawsome/css/all.min.css" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Admin - Funcionario</title>
+  </head>
+
+  <body>
+    <div class="d-flex" id="wrapper">
+      <!-- Sidebar -->
+      <div class="bg-dark" id="sidebar-wrapper">
+        <div
+          class="sidebar-heading text-center py-4 primary-text fs-4 fw-bold text-uppercase border-bottom"
+        >
+          <img src="../assets/img/logo_2.png" class="logo" />
+        </div>
+        <div class="list-group list-group-flush my-3" id="navSide">
+          <a
+            href="./admin.html"
+            class="list-group-item list-group-item-action bg-transparent second-text fw-bold dash"
+          >
+            <i class="fas fa-box-archive me-2"></i>Pacotes
+          </a>
+          <a
+            href="messages.html"
+            class="list-group-item list-group-item-action bg-transparent second-text fw-bold chat active"
+          >
+            <i class="fas fa-comments me-2"></i>Mensagens
+          </a>
+          <a
+            href="../index.html"
+            class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"
+          >
+            <i class="fas fa-power-off me-2"></i>Logout
+          </a>
+        </div>
+      </div>
+      <!-- /#sidebar-wrapper -->
+
+      <!-- Page Content -->
+      <div id="page-content-wrapper">
+        <nav
+          class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4"
+        >
+          <div class="d-flex align-items-center">
+            <i
+              class="fas fa-align-left primary-text fs-4 me-3"
+              id="menu-toggle"
+            ></i>
+            <h2 class="fs-2 m-0 page-name">Mensagens</h2>
+          </div>
+        </nav>
+
+        <div class="container-fluid px-4 page-content">
+          <div class="container-fluid px-4">
+            <div class="row g-3 my-2" id="allMessages"></div>
+          </div>
+        </div>
+      </div>
+      <!-- /#page-content-wrapper -->
+    </div>
+    <script>
+      module = {};
+    </script>
+    <script type="module">
+      
+      // Import the functions from the SDKs
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+      import {
+        getDatabase,
+        ref,
+        set,
+        remove,
+        onChildAdded,
+      } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js";
+      // Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyAO1ZtCF0Vbz1CdbhJzlFVN29uEU3gVbcc",
+        authDomain: "chat-pin-delivery.firebaseapp.com",
+        projectId: "chat-pin-delivery",
+        storageBucket: "chat-pin-delivery.appspot.com",
+        messagingSenderId: "130275241010",
+        appId: "1:130275241010:web:541b2a714b9fea0c71602b",
+        measurementId: "G-T22ET6CE0L",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const db = getDatabase(app);
+
+      let msgText = document.getElementById("msgText");
+      let msgBtn = document.getElementById("msgBtn");
+      let userData = localStorage.getItem("userData");
+
+      let sender = "";
+
+      if (userData) {
+        userData = JSON.parse(userData);
+        sender = userData[0].email;
+      }
+
+      // Get senders users
+
+      // Send Message
+      module.sendMsg = function sendMsg() {
+        var msg = msgText.value;
+        var timestamp = new Date().getTime();
+        set(ref(db, "message/" + timestamp), {
+          msg: msg,
+          sender: sender,
+        });
+        updateScroll();
+      };
+      let messages = document.getElementById("allMessages");
+      let aux = '';
+      onChildAdded(ref(db, "message"),
+        (data) => {
+          if (data.val().sender !== "support") {
+            if(aux != data.val().sender) {
+              aux = data.val().sender;
+              messages.innerHTML +=
+                `<div class='col-md-3'><div class='p-3 bg-dark text-white shadow-sm d-flex justify-content-around align-items-center rounded' onclick='openChat("${aux}");'><i class='fas fa-user primary-text border rounded-full secondary-bg p-2 me-2'></i><div><span>${aux}</span></div></div></div>`;
+              
+            } 
+          }
+      });
+    </script>
+    <script>
+      var el = document.getElementById("wrapper");
+      const toggleButton = document.getElementById("menu-toggle");
+
+      toggleButton.onclick = function () {
+        // console.log(el.classList.toggle("toggled"));
+        el.classList.toggle("toggled");
+      };
+    </script>
+    <script src="../js/jquery-3.1.1.min.js"></script>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="./script.js"></script>
+  </body>
+</html>

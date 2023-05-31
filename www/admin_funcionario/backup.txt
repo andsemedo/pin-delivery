@@ -1,0 +1,72 @@
+
+
+<div class="container-fluid px-4">
+    <div class="row g-3 my-2" id="allMessages">
+        
+    </div>
+
+
+</div>
+
+<script>
+    module = {};
+  </script>
+  <script type="module">
+    // Import the functions from the SDKs
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+    import {
+      getDatabase,
+      ref,
+      set,
+      remove,
+      onChildAdded
+    } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js";
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyAO1ZtCF0Vbz1CdbhJzlFVN29uEU3gVbcc",
+      authDomain: "chat-pin-delivery.firebaseapp.com",
+      projectId: "chat-pin-delivery",
+      storageBucket: "chat-pin-delivery.appspot.com",
+      messagingSenderId: "130275241010",
+      appId: "1:130275241010:web:541b2a714b9fea0c71602b",
+      measurementId: "G-T22ET6CE0L",
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    let msgText = document.getElementById("msgText");
+    let msgBtn = document.getElementById("msgBtn");
+    let userData = localStorage.getItem('userData');
+
+    let sender = '';
+
+    if(userData) {
+      userData = JSON.parse(userData);
+      sender = userData[0].email;
+    }
+    
+    // Get senders users
+
+    // Send Message
+    module.sendMsg = function sendMsg() {
+      var msg = msgText.value;
+      var timestamp = new Date().getTime();
+      set(ref(db, "message/" + timestamp), {
+        msg: msg,
+        sender: sender,
+      });
+      updateScroll()
+    };
+    let messages = document.getElementById('allMessages');
+    ref(db, 'message'), (data) => {
+      if(data.val().sender !== 'support') {
+        messages.innerHTML += '<div class="col-md-3"><div class="p-3 bg-dark text-white shadow-sm d-flex justify-content-around align-items-center rounded"><i class="fas fa-user primary-text border rounded-full secondary-bg p-2 me-2"></i><div><span>'+data.val().sender+'</span></div></div></div>';
+      }
+      
+
+    }
+    
+    
+  </script>

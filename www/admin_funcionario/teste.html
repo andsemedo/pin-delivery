@@ -7,16 +7,16 @@
 
     <title>Support</title>
 
-    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.css" />
-    <link rel="stylesheet" href="./assets/fontawsome/css/all.css" />
-    <link rel="stylesheet" href="./css/index.css" />
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="../assets/fontawsome/css/all.css" />
+    <!-- <link rel="stylesheet" href="./css/index.css" /> -->
   </head>
   <body>
       <section
         class="d-flex align-items-center justify-content-between bg-dark text-white p-2 ps-4 sticky-top"
       >
-        <h4 onclick="backToSupport()"><i class="fa-solid fa-angle-left"></i></h4>
-        <h4>Chat</h4>
+        <h4 onclick="window.location = './messages.html'"><i class="fa-solid fa-angle-left"></i></h4>
+        <h4 id="chatTitle">Chat</h4>
         <div></div>
       </section>
 
@@ -49,6 +49,12 @@
 
     
     <script>
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const customer = urlParams.get('c');
+
+      document.getElementById('chatTitle').innerHTML = customer;
+
       function updateScroll() {
         let messages = document.getElementById('messages');
         messages.scrollTop = messages.scrollHeight
@@ -100,16 +106,16 @@
         var timestamp = new Date().getTime();
         set(ref(db, "message/" + timestamp), {
           msg: msg,
-          sender: sender,
-          to: 'support',
+          sender: 'support',
+          to: customer,
         });
         updateScroll()
       };
       let messages = document.getElementById('messages');
       onChildAdded(ref(db, 'message'), (data) => {
-        if(data.val().sender === sender) {
+        if(data.val().sender === 'support' && data.val().to === customer) {
           messages.innerHTML += "<div class='myMessage bg-success text-white p-3 w-75 rounded mt-3' style='margin-left: 25%;'>"+data.val().msg+"</div>";
-        } else {
+        } else if(data.val().sender === customer) {
           messages.innerHTML += "<div class='supportMessage bg-dark text-white p-3 w-75 rounded mt-3'>"+data.val().msg+"</div>";
         }
         
@@ -119,8 +125,8 @@
       
     </script>
 
-    <script src="./js/jquery-3.1.1.min.js"></script>
-    <script src="./assets/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="./js/index.js"></script>
+    <script src="../js/jquery-3.1.1.min.js"></script>
+    <script src="../assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="./js/index.js"></script> -->
   </body>
 </html>

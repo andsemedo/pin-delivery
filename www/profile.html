@@ -1,26 +1,30 @@
 <section class="p-4 pt-3">
   <div class="w-100 border-bottom border-secondary pt-3" style="height: 25vh">
-    <script>
-      if (!localStorage.getItem("fillUser")) {
-        // $('#fillUser').html('Convidado');
-        $("#fillUser").append("Convidado");
-      } else {
-        $("#fillUser").html(localStorage.getItem("fillUser"));
-      }
-    </script>
+    
 
     <div>
       <span class="fw-bold" id="fillUser">Olá, </span
       ><span class="fw-bold">!</span>
     </div>
 
-    <button
-      class="btn bg-dark bg-gradient text-white pb-2 w-75 mt-3 text-center rounded-5 fw-semibold"
-      data-bs-toggle="modal"
-      data-bs-target="#registrationModal"
-    >
-      Registrar <i class="fa-solid fa-angle-right"></i>
-    </button>
+   
+      <button
+        class="btn bg-dark bg-gradient text-white pb-2 w-75 mt-3 text-center rounded-5 fw-semibold"
+        id="registerBtnOpt"
+        data-bs-toggle="modal"
+        data-bs-target="#registrationModal"
+      >
+        Registrar
+      </button>
+
+      <button
+      class="btn btn-danger pb-2 w-75 mt-3 text-center rounded-5 fw-semibold"
+      id="logoutBtnOpt"
+      onclick="logout()"
+      >
+        Logout
+      </button>
+   
 
     <!-- Modal -->
 
@@ -34,7 +38,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title fs-5" id="modal-title">Registrar</h5>
+            <h5 class="modal-title fs-5" id="modalTitle">Entrar</h5>
             <button
               type="button"
               class="btn-close"
@@ -45,7 +49,7 @@
 
           <div class="modal-body">
             <div class="form-group row">
-
+              <div id="emailVerifyDiv">
                 <div class="col-12 mb-2">
                     <span class="text-danger fw-semibold visually-hidden" id="emailVerAlert">Preencha este campo!</span>
                     <span class="text-danger fw-semibold visually-hidden" id="emailVerInvalido">E-mail digitado não é válido!</span>
@@ -59,54 +63,81 @@
                     />
                 </div>
 
-                <div class="col-12" id="emailVerBtn">
-                    <input type="submit" class="btn bg-dark text-white mt-2 w-100 rounded-5" onclick="verifyEmail()" value="Verificar e-mail">
-                </div>
+                  <div class="col-12" id="emailVerBtn">
+                      <input type="submit" class="btn bg-dark text-white mt-2 w-100 rounded-5" onclick="verifyEmail()" value="Entre com a sua conta">
+                  </div>
+              </div>
                 
-                
 
-                <!-- After verify email -->
-                <section class="visually-hidden" id="AfterEmailVer">
-                    <div class="col-12 mb-2">
-                        <input
-                        type="text"
-                        class="form-control"
-                        id="firstName"
-                        placeholder="Primeiro nome"
-                        required
-                        />
-                    </div>
+              <!-- After verify email -->
+              <section class="visually-hidden" id="AfterEmailVer">
+                <form class="row" onsubmit="return false" onchange="verifyFormRegistration()">
+                  <div class="col-12 mb-2">
+                      <input
+                      type="text"
+                      class="form-control"
+                      id="firstNameInp"
+                      placeholder="Primeiro nome"
+                      required
+                      />
+                  </div>
 
-                    <div class="col-12 mb-2">
-                        <input
-                        type="text"
-                        class="form-control"
-                        id="secondName"
-                        placeholder="Segundo nome"
-                        required
-                        />
-                    </div>
+                  <div class="col-12 mb-2">
+                      <input
+                      type="text"
+                      class="form-control"
+                      id="secondNameInp"
+                      placeholder="Último apelido"
+                      required
+                      />
+                  </div>
 
-                    <div class="col-5 mb-2">
-                        <select class="form-select">
-                            <option value="">+238</option>
-                        </select>
-                    </div>
+                  <div class="col-12 mb-2">
+                    <input
+                    type="number"
+                    class="form-control"
+                    id="mobileNumberInp"
+                    placeholder="Telemóvel"
+                    required
+                    />
+                  </div>
 
-                    <div class="col-7 mb-2">
-                        <input
-                        type="number"
-                        class="form-control"
-                        id="mobileNumber"
-                        placeholder="Telemóvel"
-                        required
-                        />
-                    </div>
+                  <div class="col-12 mb-2">
+                      <input
+                      type="text"
+                      class="form-control"
+                      id="countryInp"
+                      placeholder="País"
+                      required
+                      />
+                  </div>
 
-                    <div class="col-12" id="emailVerBtn">
-                        <input type="submit" class="btn bg-dark text-white mt-2 w-100 rounded-5" onclick="" value="Registrar">
-                    </div>
-                </section>
+                  <div class="col-12 mb-2">
+                      <input
+                      type="text"
+                      class="form-control"
+                      id="cityInp"
+                      placeholder="Cidade"
+                      required
+                      />
+                  </div>
+
+                  <div class="col-12 mb-2">
+                      <input
+                      type="email"
+                      class="form-control"
+                      id="emailInp"
+                      placeholder="Digite o seu E-mail"
+                      required
+                    />
+                  </div>
+
+                  
+                  <div class="col-12" id="emailVerBtn">
+                      <input type="submit" class="btn bg-dark text-white mt-2 w-100 rounded-5"  id="submitBtn" value="Registrar" disabled onclick="createAccount()">
+                  </div>
+                </form>
+              </section>
 
             </div>
           </div>
@@ -115,6 +146,27 @@
     </div>
   </div>
 </section>
+
+<script>
+  let user = localStorage.getItem('userData');
+  let userName = '';
+
+  if(user) {
+    user = JSON.parse(user);
+    userName = user[0].nome
+  } 
+
+
+
+  if(!userName) {
+    $('#fillUser').append('Convidado');
+    document.getElementById('logoutBtnOpt').style.display = 'none';
+    // 
+  } else {
+    $("#fillUser").append(userName);
+    document.getElementById('registerBtnOpt').style.display = 'none';
+  }
+</script>
 
 <!-- <section class="p-4 pt-3">
     
