@@ -96,7 +96,7 @@ function getUserAndFetch(email) {
         $("#emailRegister").val(email);
       }
     } else if(res[0].email == email) {
-      if(email == 'func@pindelivery.com') {
+      if(res[0].email == 'func@pindelivery.com') {
         const userData = JSON.stringify(res);
         localStorage.setItem('userData', userData);
         window.location = './admin_funcionario/admin.html';

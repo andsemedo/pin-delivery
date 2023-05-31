@@ -191,6 +191,7 @@ function profile() {
     data: { item: 1 },
     success: function (data) {
       $(".all-content").html(data);
+      $("#time").html('1');
     }
   });
 }
@@ -236,15 +237,19 @@ function getUserAndFetch(email, fromTransport=false) {
     } else if(res[0].email == email) {
       const userData = JSON.stringify(res);
       localStorage.setItem('userData', userData);
+      if(email == 'func@pindelivery.com') {
+        window.location = './admin_funcionario/admin.html'
+      } else {
+        window.location = './home.html';
+      }
+      
       if(fromTransport) {
         $("#btnPayment").attr("data-bs-toggle", "modal");
         $("#btnPayment").attr("data-bs-target", "#paymentModal");
         
         document.getElementById('btnCloseModalLogin').click()
         document.getElementById('btnPayment').click()
-      } else {
-        window.location = './home.html';
-      }
+      } 
     }
 
   });
@@ -257,7 +262,7 @@ async function newUser(url, table, email, name, phone, address) {
   
 }
 
-function verifyEmail() {
+function verifyEmail(fromTransport=false) {
 
   let emailVer = $('#emailVer').val();
 
@@ -284,7 +289,7 @@ function verifyEmail() {
 
       } else {
 
-        getUserAndFetch(emailVer, true)
+        getUserAndFetch(emailVer, fromTransport)
 
         // $('#emailVerAlert').addClass('visually-hidden');
         // $('#emailVerInvalido').addClass('visually-hidden');

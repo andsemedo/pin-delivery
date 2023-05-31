@@ -3,6 +3,7 @@
     
 
     <div>
+      <input type="text" value="1" id="time" hidden>
       <span class="fw-bold" id="fillUser">Olá, </span
       ><span class="fw-bold">!</span>
     </div>
@@ -64,7 +65,7 @@
                 </div>
 
                   <div class="col-12" id="emailVerBtn">
-                      <input type="submit" class="btn bg-dark text-white mt-2 w-100 rounded-5" onclick="verifyEmail()" value="Entre com a sua conta">
+                      <input type="submit" class="btn bg-dark text-white mt-2 w-100 rounded-5" onclick="verifyEmail(false)" value="Entre com a sua conta">
                   </div>
               </div>
                 
@@ -134,7 +135,7 @@
 
                   
                   <div class="col-12" id="emailVerBtn">
-                      <input type="submit" class="btn bg-dark text-white mt-2 w-100 rounded-5"  id="submitBtn" value="Registrar" disabled onclick="createAccount()">
+                      <input type="submit" class="btn bg-dark text-white mt-2 w-100 rounded-5"  id="submitBtn" value="Registrar" disabled onclick="createAccount(false)">
                   </div>
                 </form>
               </section>
@@ -148,23 +149,27 @@
 </section>
 
 <script>
-  let user = localStorage.getItem('userData');
-  let userName = '';
+  console.log(document.getElementById('time'));
+  if(document.getElementById('time').value == '1') {
+    let user = localStorage.getItem('userData');
+    let userName = '';
 
-  if(user) {
-    user = JSON.parse(user);
-    userName = user[0].nome
-  } 
+    if(user) {
+      user = JSON.parse(user);
+      userName = user[0].nome
+    } 
 
 
 
-  if(!userName) {
-    $('#fillUser').append('Convidado');
-    document.getElementById('logoutBtnOpt').style.display = 'none';
-    // 
-  } else {
-    $("#fillUser").append(userName);
-    document.getElementById('registerBtnOpt').style.display = 'none';
+    if(!userName) {
+      $('#fillUser').append('Convidado');
+      document.getElementById('logoutBtnOpt').style.display = 'none';
+      // 
+    } else {
+      $("#fillUser").append(userName);
+      document.getElementById('registerBtnOpt').style.display = 'none';
+    }
+    document.getElementById('time').value = '2'
   }
 </script>
 
